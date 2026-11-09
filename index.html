@@ -53,6 +53,11 @@ h2{font:700 1.6rem/1.2 var(--f-display);margin:0 0 6px}
 .media{background:var(--sheet);border-bottom:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
 .stage{aspect-ratio:16/9;width:100%;max-width:100%;background:#0e1418;display:flex;align-items:center;justify-content:center}
 .stage video,.stage img{width:100%;height:100%;object-fit:contain;display:block}
+.stage{position:relative}
+.slides .nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(14,20,24,.7);color:#fff;font:400 26px/1 var(--f-body);cursor:pointer;z-index:2;display:none}
+.slides .nav.prev{left:10px}.slides .nav.next{right:10px}
+.slides.on-slide .nav{display:block}
+.cap{font:500 13px/1.4 var(--f-mono);color:var(--muted);padding:8px 10px 0;min-height:1.4em}
 .thumbs{display:flex;gap:6px;padding:8px;flex-wrap:wrap;background:var(--sheet);border-top:1px solid var(--line)}
 .thumb{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:4px;padding:0;width:72px;height:44px;cursor:pointer;overflow:hidden;font:500 11px var(--f-mono)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -144,13 +149,13 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
       </article>
 
       <article class="sheet">
-        <div class="media"><div class="stage"><video controls playsinline preload="metadata" poster="cr-1.jpg" src="cr.mp4" aria-label="LA County Crash Risk Explorer layer tour video"></video></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cr.mp4" data-poster="cr-1.jpg" aria-label="Play layer tour">▶ Tour</button><button class="thumb" type="button" aria-pressed="false" data-img="cr-1.jpg" aria-label="Screenshot 1: crash points"><img src="cr-1.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-2.jpg" aria-label="Screenshot 2: hot spot analysis"><img src="cr-2.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-3.jpg" aria-label="Screenshot 3: dominant crash type"><img src="cr-3.jpg" alt=""></button></div></div>
+        <div class="media slides"><div class="stage"><video controls playsinline preload="metadata" poster="cr-1.jpg" src="cr.mp4" aria-label="LA County Crash Risk Explorer layer tour video"></video><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Layer tour · use the arrows or thumbnails to step through each map</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cr.mp4" data-poster="cr-1.jpg" aria-label="Play layer tour">▶ Tour</button><button class="thumb" type="button" aria-pressed="false" data-img="cr-1.jpg" data-cap="About 52,000 LA County crashes in 2025, from SWITRS" aria-label="Slide 1: About 52,000 LA County crashes in 2025, from SWITRS"><img src="cr-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-2.jpg" data-cap="Overall crash risk: Getis-Ord Gi* hot spots" aria-label="Slide 2: Overall crash risk: Getis-Ord Gi* hot spots"><img src="cr-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-3.jpg" data-cap="Central LA: where the significant hot spots cluster" aria-label="Slide 3: Central LA: where the significant hot spots cluster"><img src="cr-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-4.jpg" data-cap="Speeding crash hot spots" aria-label="Slide 4: Speeding crash hot spots"><img src="cr-4.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-5.jpg" data-cap="Unsafe turning crash hot spots" aria-label="Slide 5: Unsafe turning crash hot spots"><img src="cr-5.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-6.jpg" data-cap="Unsafe lane-change crash hot spots" aria-label="Slide 6: Unsafe lane-change crash hot spots"><img src="cr-6.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-7.jpg" data-cap="Crash rate by area" aria-label="Slide 7: Crash rate by area"><img src="cr-7.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-8.jpg" data-cap="Dominant crash type by area" aria-label="Slide 8: Dominant crash type by area"><img src="cr-8.jpg" alt="" loading="lazy"></button></div></div>
         <div class="body">
-          <div class="meta">Cal Poly Pomona · 2026 · Web app</div>
+          <div class="meta">Class group project · 2026 · Web app</div>
           <h3>LA County Crash Risk Explorer</h3>
-          <p>Where are LA County's most dangerous roads, and why? The app maps about 52,000 crashes from 2025 by their top three causes, shows where each one clusters, and sets that against poverty and hospital access.</p>
-          <ul class="steps"><li>Sorted 2025 SWITRS crash records into speeding, unsafe turning and unsafe lane-change crashes, then calculated crash rates and cause shares across 4,652 grid cells.</li><li>Ran Getis-Ord Gi* hot spot analysis overall and for each cause, finding 351 statistically significant hot spots.</li><li>Built an Experience Builder app with Near Me, a swipe tool to compare layers, search and a data table, plus poverty and acute-care hospital layers.</li></ul>
-          <div class="chips"><span class="chip">SWITRS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Grid aggregation</span><span class="chip">Experience Builder</span><span class="chip">ArcGIS Online</span></div>
+          <p>Where are LA County's most dangerous roads, and why? Our team mapped about 52,000 crashes from 2025 by their top three causes. I led the spatial analysis: finding where each cause clusters and setting that against poverty and hospital access.</p>
+          <ul class="steps"><li>Sorted 2025 SWITRS crash records into speeding, unsafe turning and unsafe lane-change crashes, then calculated crash rates and cause shares across 4,652 grid cells.</li><li>Ran Getis-Ord Gi* hot spot analysis overall and for each cause, finding 351 statistically significant hot spots.</li><li>Prepared the analysis layers for the team's Experience Builder app, which adds Near Me, a swipe comparison, search and a data table.</li></ul>
+          <div class="chips"><span class="chip">SWITRS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Grid aggregation</span><span class="chip">Experience Builder</span><span class="chip">Team project</span></div>
           <p style="margin:14px 0 0"><a href="https://experience.arcgis.com/experience/a1983ffd64a44b7aadb6362c343ee661" target="_blank" rel="noopener">Open the live app →</a></p>
         </div>
       </article>
@@ -234,15 +239,23 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   document.fonts&&document.fonts.ready.then(all);
 
-  document.querySelectorAll('.media').forEach(m=>{const stage=m.querySelector('.stage');const btns=m.querySelectorAll('.thumb');
-    const vid=stage.querySelector('video');const base=stage.querySelector('img');
-    btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+  document.querySelectorAll('.media').forEach(m=>{const stage=m.querySelector('.stage');const btns=[...m.querySelectorAll('.thumb')];
+    const vid=stage.querySelector('video');const base=stage.querySelector(':scope > img');const cap=m.querySelector('.cap');const capDefault=cap?cap.textContent:'';
+    let cur=0;
+    const show=i=>{cur=i;const b=btns[i];btns.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+      if(cap)cap.textContent=b.dataset.cap?`${i} / ${btns.length-1} · ${b.dataset.cap}`:capDefault;
+      m.classList.toggle('on-slide',!!b.dataset.img);
       if(!vid){base.src=b.dataset.img;return}
       vid.pause();
-      const old=stage.querySelector('img');if(old)old.remove();
-      if(b.dataset.img){vid.hidden=true;const im=document.createElement('img');im.src=b.dataset.img;im.alt='Project screenshot';stage.appendChild(im)}
-      else{vid.hidden=false}
-    }))});
+      const old=stage.querySelector(':scope > img');if(old)old.remove();
+      if(b.dataset.img){vid.hidden=true;const im=document.createElement('img');im.src=b.dataset.img;im.alt=b.dataset.cap||'Project screenshot';stage.appendChild(im)}
+      else{vid.hidden=false}};
+    btns.forEach((b,i)=>b.addEventListener('click',()=>show(i)));
+    const step=d=>{const imgs=btns.map((b,i)=>b.dataset.img?i:-1).filter(i=>i>=0);let k=imgs.indexOf(cur);k=k<0?0:(k+d+imgs.length)%imgs.length;show(imgs[k])};
+    m.querySelector('.prev')?.addEventListener('click',()=>step(-1));
+    m.querySelector('.next')?.addEventListener('click',()=>step(1));
+    m.addEventListener('keydown',e=>{if(!m.classList.contains('slides'))return;if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+  });
   const btn=document.getElementById('copyEmail');
   btn.addEventListener('click',()=>{const t=document.getElementById('email').textContent;
     const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',1500)};
