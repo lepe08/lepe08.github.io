@@ -107,7 +107,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
 <main class="wrap">
   <section id="work">
     <h2>Selected work</h2>
-    <p class="sub">Four projects from 2026. Each one has a recorded demo, so you can see the working app even without an ArcGIS login.</p>
+    <p class="sub">Five projects from 2026. Each one has a recorded demo or screenshots, so you can see the working app even without an ArcGIS login.</p>
     <div class="projects">
 
       <article class="sheet">
@@ -140,6 +140,18 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
           <p>A tool for Southern California: drop a location and see who is at risk during a fire, by census tract, including who may not be able to evacuate on their own or receive an alert.</p>
           <ul class="steps"><li>Built canopy height models from LiDAR to describe vegetation fuel.</li><li>Created a normalized vulnerability index from American Community Survey data covering evacuation barriers, alert access and recovery capacity.</li><li>Ran Getis-Ord Gi* hot spot analysis and published the results in Experience Builder.</li></ul>
           <div class="chips"><span class="chip">LiDAR / CHM</span><span class="chip">ACS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Experience Builder</span></div>
+        </div>
+      </article>
+
+      <article class="sheet">
+        <div class="media"><div class="stage"><img src="cr-1.jpg" alt="LA County Crash Risk Explorer showing 2025 crash points across Los Angeles County"></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-img="cr-1.jpg" aria-label="Screenshot 1: crash points"><img src="cr-1.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-2.jpg" aria-label="Screenshot 2: hot spot analysis"><img src="cr-2.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-3.jpg" aria-label="Screenshot 3: dominant crash type"><img src="cr-3.jpg" alt=""></button></div></div>
+        <div class="body">
+          <div class="meta">Cal Poly Pomona · 2026 · Web app</div>
+          <h3>LA County Crash Risk Explorer</h3>
+          <p>Where are LA County's most dangerous roads, and why? The app maps about 52,000 crashes from 2025 by their top three causes, shows where each one clusters, and sets that against poverty and hospital access.</p>
+          <ul class="steps"><li>Sorted 2025 SWITRS crash records into speeding, unsafe turning and unsafe lane-change crashes, then calculated crash rates and cause shares across 4,652 grid cells.</li><li>Ran Getis-Ord Gi* hot spot analysis overall and for each cause, finding 351 statistically significant hot spots.</li><li>Built an Experience Builder app with Near Me, a swipe tool to compare layers, search and a data table, plus poverty and acute-care hospital layers.</li></ul>
+          <div class="chips"><span class="chip">SWITRS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Grid aggregation</span><span class="chip">Experience Builder</span><span class="chip">ArcGIS Online</span></div>
+          <p style="margin:14px 0 0"><a href="https://experience.arcgis.com/experience/a1983ffd64a44b7aadb6362c343ee661" target="_blank" rel="noopener">Open the live app →</a></p>
         </div>
       </article>
 
@@ -180,7 +192,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   </section>
 </main>
 
-<footer><div class="wrap">Alexis Lepe · GIS portfolio · Updated September 2026</div></footer>
+<footer><div class="wrap">Alexis Lepe · GIS portfolio · Updated November 2026</div></footer>
 
 <script>
 (function(){
@@ -223,8 +235,9 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   document.fonts&&document.fonts.ready.then(all);
 
   document.querySelectorAll('.media').forEach(m=>{const stage=m.querySelector('.stage');const btns=m.querySelectorAll('.thumb');
-    const vid=stage.querySelector('video');
+    const vid=stage.querySelector('video');const base=stage.querySelector('img');
     btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+      if(!vid){base.src=b.dataset.img;return}
       vid.pause();
       const old=stage.querySelector('img');if(old)old.remove();
       if(b.dataset.img){vid.hidden=true;const im=document.createElement('img');im.src=b.dataset.img;im.alt='Project screenshot';stage.appendChild(im)}
