@@ -3,172 +3,285 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="GIS portfolio of Alexis Lepe: spatial analysis, web mapping and remote sensing projects built with ArcGIS.">
+<meta name="description" content="GIS portfolio of Alexis Lepe: spatial analysis, conservation, web mapping and remote sensing projects built with ArcGIS.">
 <meta property="og:title" content="Alexis Lepe | GIS Portfolio">
-<meta property="og:description" content="Spatial analysis, web mapping and remote sensing projects with recorded demos.">
-<meta property="og:image" content="wc-1.jpg">
+<meta property="og:description" content="Spatial analysis, conservation and web mapping projects with maps, demos and live apps.">
+<meta property="og:image" content="cr-3.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 22c6-10 10 2 16-8s8-4 8-4' fill='none' stroke='%23b8733a' stroke-width='3'/%3E%3C/svg%3E">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Alexis Lepe | GIS Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a survey sheet. Contour-line hero, then a single reading column with project "map sheets" and a compact record below. */
+/* Layout: a survey sheet. Contour-line hero, featured project "map sheets", a compact grid of more work, then the record. */
 :root{
   --paper:#f5f6f1; --sheet:#ffffff; --ink:#1d2a33; --muted:#5b6a70; --line:#d9ddd3;
   --contour:#b8733a; --water:#2f6f8f; --chip:#eef1ea;
+  --cpp:#1e4d2b; --cpp-bg:#e6efe8; --mtsac:#7a2531; --mtsac-bg:#f4e6e8; --esri:#00619b; --esri-bg:#e3eff7;
   --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
   --f-body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+@media (prefers-color-scheme:dark){:root{
   --paper:#141b20; --sheet:#1b242a; --ink:#e4e8e2; --muted:#9aa8ad; --line:#2c3940;
-  --contour:#d9955a; --water:#6fb1d0; --chip:#223038; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#141b20; --sheet:#1b242a; --ink:#e4e8e2; --muted:#9aa8ad; --line:#2c3940;
-  --contour:#d9955a; --water:#6fb1d0; --chip:#223038; color-scheme:dark}
-
+  --contour:#d9955a; --water:#6fb1d0; --chip:#223038; color-scheme:dark;
+  --cpp:#9fd3ab; --cpp-bg:#1f3326; --mtsac:#e6a3ad; --mtsac-bg:#3a2226; --esri:#8cc8ef; --esri-bg:#17303f}}
 *{box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--f-body);margin:0}
-.wrap{max-width:980px;margin:0 auto;padding-inline:20px}
+img{max-width:100%}[hidden]{display:none!important}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px}
 a{color:var(--water)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--contour);outline-offset:2px}
+a:focus-visible,button:focus-visible,.gallery:focus-visible{outline:2px solid var(--contour);outline-offset:2px}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:20px;height:52px}
+.topbar b{font:700 16px var(--f-display);margin-right:auto}
+.topbar a{font:500 13px var(--f-mono);color:var(--ink);text-decoration:none;letter-spacing:.03em}
+.topbar a:hover{color:var(--contour)}
 
 header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 #topo{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero .wrap{position:relative;padding-block:72px 56px}
+.hero .wrap{position:relative;padding-block:64px 52px}
 .coords{font:500 12px/1 var(--f-mono);letter-spacing:.08em;color:var(--contour);text-transform:uppercase}
-h1{font:700 clamp(2.6rem,7vw,4.6rem)/1 var(--f-display);margin:.35em 0 .2em;letter-spacing:-.02em;text-wrap:balance}
-.role{font:500 clamp(1.1rem,2.4vw,1.4rem)/1.35 var(--f-display);color:var(--muted);margin:0 0 1.2em;max-width:36ch}
-.contact{display:flex;flex-wrap:wrap;gap:10px 22px;font:400 14px/1.4 var(--f-mono)}
+h1{font:700 clamp(2.6rem,7vw,4.6rem)/1 var(--f-display);margin:.35em 0 .2em;letter-spacing:-.02em}
+.role{font:500 clamp(1.1rem,2.4vw,1.4rem)/1.35 var(--f-display);color:var(--muted);margin:0 0 1.1em;max-width:40ch}
+.contact{display:flex;flex-wrap:wrap;gap:10px 18px;font:400 14px/1.4 var(--f-mono);align-items:center}
 .contact span{display:inline-flex;gap:8px;align-items:center}
-.copy{font:500 12px var(--f-mono);border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:4px;padding:3px 8px;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:6px;font:500 13px var(--f-mono);border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:4px;padding:6px 10px;cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px;max-width:760px}
+.fact{background:color-mix(in srgb,var(--sheet) 85%,transparent);border:1px solid var(--line);border-radius:6px;padding:10px 14px}
+.fact b{display:block;font:700 1.12rem/1.15 var(--f-display);margin-bottom:3px}
+.fact span{font:400 12.5px/1.3 var(--f-mono);color:var(--muted)}
 
 section{padding-block:56px}
 h2{font:700 1.6rem/1.2 var(--f-display);margin:0 0 6px}
-.sub{color:var(--muted);margin:0 0 28px;max-width:62ch}
+.sub{color:var(--muted);margin:0 0 28px;max-width:66ch}
 
-.projects{display:grid;gap:32px}
-.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+/* org badges (text, not logos) */
+.org{display:inline-flex;align-items:center;gap:6px;font:600 11.5px/1 var(--f-mono);letter-spacing:.02em;border-radius:999px;padding:5px 9px 5px 8px;white-space:nowrap}
+.org::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.org-cpp{color:var(--cpp);background:var(--cpp-bg)}
+.org-mtsac{color:var(--mtsac);background:var(--mtsac-bg)}
+.org-esri{color:var(--esri);background:var(--esri-bg)}
+.toprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.meta{font:500 12px/1.4 var(--f-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+
+/* featured sheets */
+.projects{display:grid;gap:36px}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:8px;display:flex;flex-direction:column;overflow:hidden}
 .media{background:var(--sheet);border-bottom:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
-.stage{aspect-ratio:16/9;width:100%;max-width:100%;background:#0e1418;display:flex;align-items:center;justify-content:center}
+.stage{position:relative;aspect-ratio:16/9;width:100%;background:#0e1418;display:flex;align-items:center;justify-content:center}
 .stage video,.stage img{width:100%;height:100%;object-fit:contain;display:block}
-.stage{position:relative}
-.slides .nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(14,20,24,.7);color:#fff;font:400 26px/1 var(--f-body);cursor:pointer;z-index:2;display:none}
-.slides .nav.prev{left:10px}.slides .nav.next{right:10px}
-.slides.on-slide .nav{display:block}
-.cap{font:500 13px/1.4 var(--f-mono);color:var(--muted);padding:8px 10px 0;min-height:1.4em}
-.thumbs{display:flex;gap:6px;padding:8px;flex-wrap:wrap;background:var(--sheet);border-top:1px solid var(--line)}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(14,20,24,.72);color:#fff;font:400 28px/1 var(--f-body);cursor:pointer;z-index:2}
+.nav.prev{left:10px}.nav.next{right:10px}
+.gallery.on-video .nav{display:none}
+.cap{font:500 13px/1.4 var(--f-mono);color:var(--muted);padding:9px 12px 0;min-height:1.4em}
+.thumbs{display:flex;gap:6px;padding:8px 10px 10px;flex-wrap:wrap}
 .thumb{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:4px;padding:0;width:72px;height:44px;cursor:pointer;overflow:hidden;font:500 11px var(--f-mono)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .thumb[aria-pressed="true"]{outline:2px solid var(--contour);outline-offset:1px}
-.sheet .body{padding:24px 26px;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:36px;align-content:start}
+.sheet .body{padding:24px 26px 26px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:36px;align-content:start}
 .sheet .body > *{grid-column:1}
-.sheet .body > .steps{grid-column:2;grid-row:1 / 5;margin-top:4px}
-.meta{font:500 12px/1.4 var(--f-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
-.sheet h3{font:700 1.3rem/1.25 var(--f-display);margin:0 0 10px;text-wrap:balance}
+.sheet .body > .steps{grid-column:2;grid-row:1 / 7;margin-top:4px}
+.sheet h3{font:700 1.35rem/1.25 var(--f-display);margin:0 0 10px;text-wrap:balance}
 .sheet p{margin:0 0 12px;max-width:64ch}
 .steps{margin:0 0 14px;padding-left:1.1em}
-.steps li{margin:2px 0}
+.steps li{margin:3px 0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:400 12px/1 var(--f-mono);background:var(--chip);border-radius:3px;padding:6px 8px}
+.links{margin:14px 0 0!important;display:flex;flex-wrap:wrap;gap:6px 18px;font-weight:600}
+.related{margin:16px 0 0!important;padding-top:14px;border-top:1px dashed var(--line);font-size:15px}
+.related span{color:var(--muted)}
 
-.record{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+/* more work grid */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.mini{background:var(--sheet);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.mthumb{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;background:#0e1418;border-bottom:1px solid var(--line)}
+.mthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.mthumb:hover img{transform:scale(1.03)}
+.mthumb span{position:absolute;left:10px;bottom:10px;font:500 12px var(--f-mono);background:rgba(14,20,24,.78);color:#fff;border-radius:4px;padding:5px 9px}
+.mthumb.textonly{cursor:default;background:repeating-radial-gradient(circle at 30% 120%,transparent 0 14px,color-mix(in srgb,var(--contour) 35%,transparent) 14px 15px),var(--chip)}
+.mbody{padding:18px 20px 20px}
+.mini h3{font:700 1.12rem/1.3 var(--f-display);margin:0 0 8px}
+.mini p{margin:0 0 12px;font-size:15.5px}
+
+/* dialog */
+dialog{border:0;padding:0;border-radius:10px;width:min(1100px,94vw);background:var(--sheet);color:var(--ink)}
+dialog::backdrop{background:rgba(8,12,15,.75)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.dlg-head b{font:700 1rem var(--f-display)}
+
+/* record */
+.record{display:grid;grid-template-columns:1fr 1fr;gap:44px}
 .record > div{min-width:0}
 .job{display:grid;grid-template-columns:1fr auto;gap:0 16px;padding:12px 0;border-top:1px solid var(--line)}
 .job b{font-weight:600}
 .job .when{font:400 13px/1.6 var(--f-mono);color:var(--muted);white-space:nowrap}
 .job .what{grid-column:1/-1;color:var(--muted);font-size:15px}
+.job .org{margin-top:6px;justify-self:start;grid-column:1/-1}
 .skills dt{font:500 12px/1.4 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--contour);margin-top:14px}
 .skills dd{margin:4px 0 0}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.school{background:var(--sheet);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+.school h3{font:700 1.15rem var(--f-display);margin:8px 0 8px}
+.school ul{margin:0;padding-left:1.1em}
+.school li{margin:3px 0}
+.school li span{font:400 13px var(--f-mono);color:var(--muted)}
 
 footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font:400 13px var(--f-mono)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
 
-@media (max-width:720px){
+@media (max-width:760px){
   .sheet .body{grid-template-columns:1fr}
   .sheet .body > .steps{grid-column:1;grid-row:auto}
-  .record{grid-template-columns:1fr;gap:24px}
-  .hero .wrap{padding-block:48px 40px}
+  .grid,.record,.edu{grid-template-columns:1fr;gap:24px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero .wrap{padding-block:44px 38px}
+  .topbar a.hide-sm{display:none}
+  .nav{width:36px;height:36px;font-size:24px}
 }
+@media (prefers-reduced-motion:reduce){.mthumb img{transition:none}}
 </style>
 </head>
 <body>
 
+<nav class="topbar" aria-label="Sections"><div class="wrap"><b>Alexis Lepe</b><a href="#work">Work</a><a href="#more">More</a><a href="#record" class="hide-sm">Experience</a><a href="#education" class="hide-sm">Education</a></div></nav>
 
 <header class="hero">
   <canvas id="topo" aria-hidden="true"></canvas>
   <div class="wrap">
     <div class="coords">34.020° N · 117.949° W · La Puente, California</div>
     <h1>Alexis Lepe</h1>
-    <p class="role">GIS analyst in training. I build spatial analyses and web maps with ArcGIS and open tools, and I have field and support experience behind them.</p>
+    <p class="role">GIS analyst in training. I turn field data, imagery and public records into spatial analysis and web maps people can use, with a focus on conservation, hazards and communities.</p>
     <div class="contact">
-      <span><span id="email">alexis.lepe18@gmail.com</span><button class="copy" id="copyEmail" type="button">Copy</button></span>
-      <span>B.S. Geography, Cal Poly Pomona · Dec 2026</span>
-      <span>Open to GIS analyst and technician roles</span>
+      <span><span id="email">alexis.lepe18@gmail.com</span><button class="btn" id="copyEmail" type="button">Copy</button></span>
+      <a class="btn primary" href="https://www.linkedin.com/in/alexis-lepe-332b83250/" target="_blank" rel="noopener">LinkedIn</a>
+      <span>Open to GIS analyst, technician and conservation roles</span>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>B.S. Geography</b><span>Cal Poly Pomona · Dec 2026</span></div>
+      <div class="fact"><b>Esri intern</b><span>Technical Support · 2026</span></div>
+      <div class="fact"><b>10 projects</b><span>Analysis, apps, StoryMaps</span></div>
+      <div class="fact"><b>FAA Part 107</b><span>Licensed drone pilot</span></div>
     </div>
   </div>
 </header>
 
 <main class="wrap">
   <section id="work">
-    <h2>Selected work</h2>
-    <p class="sub">Five projects from 2026. Each one has a recorded demo, so you can see the working app even without an ArcGIS login.</p>
+    <h2>Featured work</h2>
+    <p class="sub">Four projects from 2026. Each has a video tour or full-resolution map slides, so you can see the analysis without an ArcGIS login. Use the arrows or thumbnails to step through.</p>
     <div class="projects">
-
       <article class="sheet">
-        <div class="media"><div class="stage"><video controls playsinline preload="metadata" poster="wc-1.jpg" src="wc.mp4" aria-label="World Cup app demo video"></video></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="wc.mp4" data-poster="wc-1.jpg" aria-label="Play demo video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="wc-1.jpg" aria-label="Screenshot 1"><img src="wc-1.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="wc-2.jpg" aria-label="Screenshot 2"><img src="wc-2.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="wc-3.jpg" aria-label="Screenshot 3"><img src="wc-3.jpg" alt=""></button></div></div>
+        <div class="media gallery" tabindex="0" aria-label="LA County Crash Risk Explorer gallery"><div class="stage"><video controls playsinline preload="metadata" poster="cr-1.jpg" src="cr.mp4" aria-label="LA County Crash Risk Explorer video"></video><img hidden alt=""><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Video · use the arrows or thumbnails to see the maps</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cr.mp4" aria-label="Play video">▶ Tour</button><button class="thumb" type="button" aria-pressed="false" data-img="cr-1.jpg" data-cap="About 52,000 LA County crashes in 2025, from SWITRS" aria-label="Slide 1 of 8: About 52,000 LA County crashes in 2025, from SWITRS"><img src="cr-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-2.jpg" data-cap="Overall crash risk: Getis-Ord Gi* hot spots" aria-label="Slide 2 of 8: Overall crash risk: Getis-Ord Gi* hot spots"><img src="cr-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-3.jpg" data-cap="Central LA: where the significant hot spots cluster" aria-label="Slide 3 of 8: Central LA: where the significant hot spots cluster"><img src="cr-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-4.jpg" data-cap="Speeding crash hot spots" aria-label="Slide 4 of 8: Speeding crash hot spots"><img src="cr-4.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-5.jpg" data-cap="Unsafe turning crash hot spots" aria-label="Slide 5 of 8: Unsafe turning crash hot spots"><img src="cr-5.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-6.jpg" data-cap="Unsafe lane-change crash hot spots" aria-label="Slide 6 of 8: Unsafe lane-change crash hot spots"><img src="cr-6.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-7.jpg" data-cap="Crash rate by area" aria-label="Slide 7 of 8: Crash rate by area"><img src="cr-7.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-8.jpg" data-cap="Dominant crash type by area" aria-label="Slide 8 of 8: Dominant crash type by area"><img src="cr-8.jpg" alt="" loading="lazy"></button></div></div>
         <div class="body">
-          <div class="meta">Esri internship · 2026 · Web app</div>
-          <h3>FIFA World Cup 2026: Host Venues &amp; Match Revenue</h3>
-          <p>An interactive app covering all 104 matches of the 2026 World Cup across the 16 host stadiums in the U.S., Mexico and Canada, with projected attendance and gate revenue for every match.</p>
-          <ul class="steps"><li>Authored host stadium, capacity, attendance and match layers in ArcGIS Pro and published them as hosted feature layers.</li><li>Used the ArcGIS API for Python to calculate attendance and revenue fields and write them back to the hosted layers.</li><li>Designed custom pop-ups and delivered the app in Experience Builder with layer, legend, filter and chart tools.</li></ul>
-          <div class="chips"><span class="chip">ArcGIS Pro</span><span class="chip">ArcGIS API for Python</span><span class="chip">Hosted feature layers</span><span class="chip">Custom pop-ups</span><span class="chip">Experience Builder</span></div>
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">Class group project · 2026 · Web app</span></div>
+          <h3>LA County Crash Risk Explorer</h3>
+          <p>Where are LA County&#x27;s most dangerous roads, and why? Our team mapped about 52,000 crashes from 2025 by their top three causes. I led the spatial analysis: finding where each cause clusters and setting that against poverty and hospital access.</p>
+          <ul class="steps"><li>Sorted 2025 SWITRS crash records into speeding, unsafe turning and unsafe lane-change crashes, then calculated crash rates and cause shares across 4,652 grid cells.</li><li>Ran Getis-Ord Gi* hot spot analysis overall and for each cause, finding 351 statistically significant hot spots.</li><li>Prepared the analysis layers for the team&#x27;s Experience Builder app, which adds Near Me, a swipe comparison, search and a data table.</li></ul>
+          <div class="chips"><span class="chip">SWITRS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Grid aggregation</span><span class="chip">Experience Builder</span><span class="chip">Team project</span></div>
+          <p class="links"><a href="https://experience.arcgis.com/experience/a1983ffd64a44b7aadb6362c343ee661" target="_blank" rel="noopener">Open the live app →</a></p>
         </div>
       </article>
-
       <article class="sheet">
-        <div class="media"><div class="stage"><video controls playsinline preload="metadata" poster="fw-1.jpg" src="fw.mp4" aria-label="Following the Water demo video"></video></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="fw.mp4" data-poster="fw-1.jpg" aria-label="Play demo video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="fw-1.jpg" aria-label="Screenshot 1"><img src="fw-1.jpg" alt=""></button></div></div>
+        <div class="media gallery" tabindex="0" aria-label="Honeybees and Urban Development in the San Gabriel Valley gallery"><div class="stage"><img src="bee-3.jpg" alt="Full period: every 99% hot spot sits on a garden or natural area"><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">1 / 5 · Full period: every 99% hot spot sits on a garden or natural area</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-img="bee-3.jpg" data-cap="Full period: every 99% hot spot sits on a garden or natural area" aria-label="Slide 1 of 5: Full period: every 99% hot spot sits on a garden or natural area"><img src="bee-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="bee-1.jpg" data-cap="2014–2018: activity concentrated near the foothills" aria-label="Slide 2 of 5: 2014–2018: activity concentrated near the foothills"><img src="bee-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="bee-2.jpg" data-cap="2019–2024: new hot spots in Arcadia, South El Monte and Claremont" aria-label="Slide 3 of 5: 2019–2024: new hot spots in Arcadia, South El Monte and Claremont"><img src="bee-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="bee-4.jpg" data-cap="Impervious surface change, 2014–2024" aria-label="Slide 4 of 5: Impervious surface change, 2014–2024"><img src="bee-4.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="bee-5.jpg" data-cap="3-mile foraging range around significant hot spots" aria-label="Slide 5 of 5: 3-mile foraging range around significant hot spots"><img src="bee-5.jpg" alt="" loading="lazy"></button></div></div>
         <div class="body">
-          <div class="meta">Esri internship · 2026 · StoryMap + Dashboard</div>
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">Independent research project · 2026 · ArcGIS Pro</span></div>
+          <h3>Honeybees and Urban Development in the San Gabriel Valley</h3>
+          <p>Does a decade of development push pollinators out? Using 6,370 research-grade iNaturalist honeybee observations and ten years of NLCD impervious surface data, I found that every 99%-confidence hot spot sits on a botanical garden or natural area, and that new hot spots appeared only where land stayed undeveloped.</p>
+          <ul class="steps"><li>Ran Optimized Hot Spot Analysis (Getis-Ord Gi*) for 2014–2018, 2019–2024 and the full period to see where bee activity clusters and how it shifted.</li><li>Clipped eleven annual NLCD impervious surface rasters and used Raster Calculator to map 2014–2024 development change.</li><li>Buffered significant hot spots by 3 miles, the typical honeybee foraging range, to estimate where source colonies are and where the valley has none.</li></ul>
+          <div class="chips"><span class="chip">iNaturalist</span><span class="chip">NLCD impervious surface</span><span class="chip">Optimized Hot Spot Analysis</span><span class="chip">Raster Calculator</span><span class="chip">Pairwise Buffer</span><span class="chip">ArcGIS Pro</span></div>
+          <p class="links"><a href="honeybee-report.pdf" target="_blank" rel="noopener">Read the full report (PDF) →</a></p>
+        </div>
+      </article>
+      <article class="sheet">
+        <div class="media gallery" tabindex="0" aria-label="Following the Water: San Gabriel Watershed gallery"><div class="stage"><video controls playsinline preload="metadata" poster="fw-1.jpg" src="fw.mp4" aria-label="Following the Water: San Gabriel Watershed video"></video><img hidden alt=""><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Video · use the arrows or thumbnails to see the maps</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="fw.mp4" aria-label="Play video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="fw-1.jpg" data-cap="StoryMap and dashboard" aria-label="Slide 1 of 1: StoryMap and dashboard"><img src="fw-1.jpg" alt="" loading="lazy"></button></div></div>
+        <div class="body">
+          <div class="toprow"><span class="org org-esri">Esri</span><span class="meta">Esri internship · 2026 · StoryMap + Dashboard</span></div>
           <h3>Following the Water: San Gabriel Watershed</h3>
           <p>How elevation data becomes a conservation decision. The study traces the land that drains to critical habitat for the Santa Ana sucker, a threatened native fish, and shows where the 2020 Bobcat Fire burn scar sends sediment into its streams.</p>
           <ul class="steps"><li>Mosaicked and projected USGS 3DEP elevation tiles, then ran Fill, Flow Direction, Flow Accumulation, Snap Pour Point and Watershed.</li><li>Built a stream network with Con and Stream to Feature and buffered USFWS critical habitat by 250 meters.</li><li>Published hosted feature services and told the story in a StoryMap and Dashboard with a live USGS stream gauge feed from Living Atlas.</li></ul>
           <div class="chips"><span class="chip">USGS 3DEP</span><span class="chip">Spatial Analyst hydrology</span><span class="chip">USFWS critical habitat</span><span class="chip">StoryMaps</span><span class="chip">Dashboards</span><span class="chip">Living Atlas</span></div>
-          <p style="margin:14px 0 0">Related watershed work: <a href="https://storymaps.arcgis.com/stories/43fcc77feb08495d82a9b2f66ed0fb5f" target="_blank" rel="noopener">Runoff and Fire Risk in the San Gabriel Mountains →</a><br><span style="color:var(--muted);font-size:15px">An earlier Mt. SAC StoryMap (2025) that models post-fire runoff and asks which foothill communities have the least flood protection.</span></p>
+          <p class="related">Related watershed work · <span class="org org-mtsac">Mt. San Antonio College</span><br><a href="https://storymaps.arcgis.com/stories/43fcc77feb08495d82a9b2f66ed0fb5f" target="_blank" rel="noopener">Runoff and Fire Risk in the San Gabriel Mountains →</a><br><span>An earlier Mt. SAC StoryMap (2025) that models post-fire runoff and asks which foothill communities have the least flood protection.</span></p>
         </div>
       </article>
-
       <article class="sheet">
-        <div class="media"><div class="stage"><video controls playsinline preload="metadata" poster="wf-1.jpg" src="wf.mp4" aria-label="Wildfire Vulnerability Explorer demo video"></video></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="wf.mp4" data-poster="wf-1.jpg" aria-label="Play demo video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="wf-1.jpg" aria-label="Screenshot 1"><img src="wf-1.jpg" alt=""></button></div></div>
+        <div class="media gallery" tabindex="0" aria-label="FIFA World Cup 2026: Host Venues &amp; Match Revenue gallery"><div class="stage"><video controls playsinline preload="metadata" poster="wc-1.jpg" src="wc.mp4" aria-label="FIFA World Cup 2026: Host Venues &amp; Match Revenue video"></video><img hidden alt=""><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Video · use the arrows or thumbnails to see the maps</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="wc.mp4" aria-label="Play video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="wc-1.jpg" data-cap="Host stadiums" aria-label="Slide 1 of 3: Host stadiums"><img src="wc-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="wc-2.jpg" data-cap="Match detail" aria-label="Slide 2 of 3: Match detail"><img src="wc-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="wc-3.jpg" data-cap="Revenue view" aria-label="Slide 3 of 3: Revenue view"><img src="wc-3.jpg" alt="" loading="lazy"></button></div></div>
         <div class="body">
-          <div class="meta">Group project · 2026 · Web app</div>
+          <div class="toprow"><span class="org org-esri">Esri</span><span class="meta">Esri internship · 2026 · Web app</span></div>
+          <h3>FIFA World Cup 2026: Host Venues &amp; Match Revenue</h3>
+          <p>An interactive app covering all 104 matches of the 2026 World Cup across the 16 host stadiums in the U.S., Mexico and Canada, with projected attendance and gate revenue for every match.</p>
+          <ul class="steps"><li>Authored host stadium, capacity, attendance and match layers in ArcGIS Pro and published them as hosted feature layers.</li><li>Used the ArcGIS API for Python to calculate attendance and revenue fields and write them back to the hosted layers.</li><li>Designed custom pop-ups and delivered the app in Experience Builder with layer, legend, filter and chart tools.</li></ul>
+          <div class="chips"><span class="chip">ArcGIS Pro</span><span class="chip">ArcGIS API for Python</span><span class="chip">Hosted feature layers</span><span class="chip">Custom pop-ups</span><span class="chip">Experience Builder</span></div>
+          
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="more" style="border-top:1px solid var(--line)">
+    <h2>More projects</h2>
+    <p class="sub">Coursework and team projects that show other methods: LiDAR, flow mapping, space-time analysis, dashboards and writing. Click a picture to see the maps.</p>
+    <div class="grid">
+      <article class="mini">
+        <button class="mthumb" type="button" aria-label="Open Wildfire Vulnerability Explorer gallery"><img src="wf-1.jpg" alt=""><span>▶ Watch demo</span></button><template><div class="media gallery" tabindex="0" aria-label="Wildfire Vulnerability Explorer gallery"><div class="stage"><video controls playsinline preload="metadata" poster="wf-1.jpg" src="wf.mp4" aria-label="Wildfire Vulnerability Explorer video"></video><img hidden alt=""><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Video · use the arrows or thumbnails to see the maps</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="wf.mp4" aria-label="Play video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="wf-1.jpg" data-cap="Wildfire Vulnerability Explorer" aria-label="Slide 1 of 1: Wildfire Vulnerability Explorer"><img src="wf-1.jpg" alt="" loading="lazy"></button></div></div></template>
+        <div class="mbody">
+          <div class="toprow"><span class="meta">Group project · Web app</span></div>
           <h3>Wildfire Vulnerability Explorer</h3>
-          <p>A tool for Southern California: drop a location and see who is at risk during a fire, by census tract, including who may not be able to evacuate on their own or receive an alert.</p>
-          <ul class="steps"><li>Built canopy height models from LiDAR to describe vegetation fuel.</li><li>Created a normalized vulnerability index from American Community Survey data covering evacuation barriers, alert access and recovery capacity.</li><li>Ran Getis-Ord Gi* hot spot analysis and published the results in Experience Builder.</li></ul>
-          <div class="chips"><span class="chip">LiDAR / CHM</span><span class="chip">ACS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Experience Builder</span></div>
+          <p>Drop a location and see who is at risk during a fire by census tract, including people who may not be able to evacuate or receive an alert. LiDAR canopy height, an ACS vulnerability index and Gi* hot spots.</p>
+          <div class="chips"><span class="chip">LiDAR</span><span class="chip">ACS</span><span class="chip">Getis-Ord Gi*</span></div>
+          
         </div>
       </article>
-
-      <article class="sheet">
-        <div class="media slides"><div class="stage"><video controls playsinline preload="metadata" poster="cr-1.jpg" src="cr.mp4" aria-label="LA County Crash Risk Explorer layer tour video"></video><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Layer tour · use the arrows or thumbnails to step through each map</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cr.mp4" data-poster="cr-1.jpg" aria-label="Play layer tour">▶ Tour</button><button class="thumb" type="button" aria-pressed="false" data-img="cr-1.jpg" data-cap="About 52,000 LA County crashes in 2025, from SWITRS" aria-label="Slide 1: About 52,000 LA County crashes in 2025, from SWITRS"><img src="cr-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-2.jpg" data-cap="Overall crash risk: Getis-Ord Gi* hot spots" aria-label="Slide 2: Overall crash risk: Getis-Ord Gi* hot spots"><img src="cr-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-3.jpg" data-cap="Central LA: where the significant hot spots cluster" aria-label="Slide 3: Central LA: where the significant hot spots cluster"><img src="cr-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-4.jpg" data-cap="Speeding crash hot spots" aria-label="Slide 4: Speeding crash hot spots"><img src="cr-4.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-5.jpg" data-cap="Unsafe turning crash hot spots" aria-label="Slide 5: Unsafe turning crash hot spots"><img src="cr-5.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-6.jpg" data-cap="Unsafe lane-change crash hot spots" aria-label="Slide 6: Unsafe lane-change crash hot spots"><img src="cr-6.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-7.jpg" data-cap="Crash rate by area" aria-label="Slide 7: Crash rate by area"><img src="cr-7.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cr-8.jpg" data-cap="Dominant crash type by area" aria-label="Slide 8: Dominant crash type by area"><img src="cr-8.jpg" alt="" loading="lazy"></button></div></div>
-        <div class="body">
-          <div class="meta">Class group project · 2026 · Web app</div>
-          <h3>LA County Crash Risk Explorer</h3>
-          <p>Where are LA County's most dangerous roads, and why? Our team mapped about 52,000 crashes from 2025 by their top three causes. I led the spatial analysis: finding where each cause clusters and setting that against poverty and hospital access.</p>
-          <ul class="steps"><li>Sorted 2025 SWITRS crash records into speeding, unsafe turning and unsafe lane-change crashes, then calculated crash rates and cause shares across 4,652 grid cells.</li><li>Ran Getis-Ord Gi* hot spot analysis overall and for each cause, finding 351 statistically significant hot spots.</li><li>Prepared the analysis layers for the team's Experience Builder app, which adds Near Me, a swipe comparison, search and a data table.</li></ul>
-          <div class="chips"><span class="chip">SWITRS</span><span class="chip">Getis-Ord Gi*</span><span class="chip">Grid aggregation</span><span class="chip">Experience Builder</span><span class="chip">Team project</span></div>
-          <p style="margin:14px 0 0"><a href="https://experience.arcgis.com/experience/a1983ffd64a44b7aadb6362c343ee661" target="_blank" rel="noopener">Open the live app →</a></p>
-        </div>
-      </article>
-
-      <article class="sheet">
-        <div class="media"><div class="stage"><video controls playsinline preload="metadata" poster="cc-1.jpg" src="cc.mp4" aria-label="Canopy Connect demo video"></video></div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cc.mp4" data-poster="cc-1.jpg" aria-label="Play demo video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="cc-1.jpg" aria-label="Screenshot 1"><img src="cc-1.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cc-2.jpg" aria-label="Screenshot 2"><img src="cc-2.jpg" alt=""></button><button class="thumb" type="button" aria-pressed="false" data-img="cc-3.jpg" aria-label="Screenshot 3"><img src="cc-3.jpg" alt=""></button></div></div>
-        <div class="body">
-          <div class="meta">Esri Intern Hackathon · 2026 · Web app</div>
+      <article class="mini">
+        <button class="mthumb" type="button" aria-label="Open Canopy Connect gallery"><img src="cc-1.jpg" alt=""><span>▶ Watch demo</span></button><template><div class="media gallery" tabindex="0" aria-label="Canopy Connect gallery"><div class="stage"><video controls playsinline preload="metadata" poster="cc-1.jpg" src="cc.mp4" aria-label="Canopy Connect video"></video><img hidden alt=""><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">Video · use the arrows or thumbnails to see the maps</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-src="cc.mp4" aria-label="Play video">▶ Demo</button><button class="thumb" type="button" aria-pressed="false" data-img="cc-1.jpg" data-cap="Tree stories map" aria-label="Slide 1 of 3: Tree stories map"><img src="cc-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cc-2.jpg" data-cap="Risk layers" aria-label="Slide 2 of 3: Risk layers"><img src="cc-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="cc-3.jpg" data-cap="Tree detail" aria-label="Slide 3 of 3: Tree detail"><img src="cc-3.jpg" alt="" loading="lazy"></button></div></div></template>
+        <div class="mbody">
+          <div class="toprow"><span class="org org-esri">Esri</span><span class="meta">Esri Intern Hackathon · Web app</span></div>
           <h3>Canopy Connect</h3>
-          <p>A crowdsourced map where people share stories about trees that matter to them. Each tree is shown with its canopy cover, development pressure, and a composite risk index for wildfire, pests and land conversion.</p>
-          <ul class="steps"><li>Owned the map delivery, spatial data pipeline and fire-risk layers for the team.</li><li>Published canopy, protected area, development and hazard layers from ArcGIS Pro to ArcGIS Online, configuring classification, symbology and pop-ups.</li></ul>
-          <div class="chips"><span class="chip">ArcGIS Pro</span><span class="chip">ArcGIS Online</span><span class="chip">Composite risk index</span><span class="chip">Team project</span></div>
+          <p>A crowdsourced map of trees people care about, each scored for canopy cover, development pressure and a composite wildfire, pest and land-conversion risk. I owned the map delivery and fire-risk layers.</p>
+          <div class="chips"><span class="chip">ArcGIS Online</span><span class="chip">Risk index</span><span class="chip">Team project</span></div>
+          
+        </div>
+      </article>
+      <article class="mini">
+        <button class="mthumb" type="button" aria-label="Open Powering Intelligence: The Energy Cost of AI gallery"><img src="ai-1.jpg" alt=""><span>View maps</span></button><template><div class="media gallery" tabindex="0" aria-label="Powering Intelligence: The Energy Cost of AI gallery"><div class="stage"><img src="ai-1.jpg" alt="Electricity rates and hourly grid demand"><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">1 / 3 · Electricity rates and hourly grid demand</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-img="ai-1.jpg" data-cap="Electricity rates and hourly grid demand" aria-label="Slide 1 of 3: Electricity rates and hourly grid demand"><img src="ai-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="ai-2.jpg" data-cap="Hourly demand by grid operator" aria-label="Slide 2 of 3: Hourly demand by grid operator"><img src="ai-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="ai-3.jpg" data-cap="Power plants over electricity rates" aria-label="Slide 3 of 3: Power plants over electricity rates"><img src="ai-3.jpg" alt="" loading="lazy"></button></div></div></template>
+        <div class="mbody">
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">StoryMap + Dashboard</span></div>
+          <h3>Powering Intelligence: The Energy Cost of AI</h3>
+          <p>Where AI-driven electricity demand is hitting the U.S. grid hardest. Hourly EIA demand by grid operator over residential rates by utility territory and power plants, showing why data centers are moving toward cheaper-power states.</p>
+          <div class="chips"><span class="chip">EIA data</span><span class="chip">Living Atlas</span><span class="chip">Dashboards</span><span class="chip">StoryMaps</span></div>
+          <p class="links"><a href="https://www.arcgis.com/apps/dashboards/7311c0b5cbd9431598dfa16cfc267340" target="_blank" rel="noopener">Open the dashboard →</a></p>
+        </div>
+      </article>
+      <article class="mini">
+        <button class="mthumb" type="button" aria-label="Open Global Honey Trade, 2023 gallery"><img src="hn-1.jpg" alt=""><span>View maps</span></button><template><div class="media gallery" tabindex="0" aria-label="Global Honey Trade, 2023 gallery"><div class="stage"><img src="hn-1.jpg" alt="Flows into the U.S. and out of China"><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">1 / 4 · Flows into the U.S. and out of China</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-img="hn-1.jpg" data-cap="Flows into the U.S. and out of China" aria-label="Slide 1 of 4: Flows into the U.S. and out of China"><img src="hn-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="hn-2.jpg" data-cap="The largest honey exporters" aria-label="Slide 2 of 4: The largest honey exporters"><img src="hn-2.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="hn-3.jpg" data-cap="Where Chinese honey goes" aria-label="Slide 3 of 4: Where Chinese honey goes"><img src="hn-3.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="hn-4.jpg" data-cap="Who sells honey to the U.S." aria-label="Slide 4 of 4: Who sells honey to the U.S."><img src="hn-4.jpg" alt="" loading="lazy"></button></div></div></template>
+        <div class="mbody">
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">Web map · Trade flows</span></div>
+          <h3>Global Honey Trade, 2023</h3>
+          <p>Who sells honey to the U.S., and at what price? Flow maps of 2023 trade show most imports arriving from India, Argentina and Brazil below the $5.62/kg U.S. beekeeper price, and where China, the largest exporter at $1.67/kg, ships instead.</p>
+          <div class="chips"><span class="chip">Flow mapping</span><span class="chip">Trade data</span><span class="chip">Map Viewer</span></div>
+          
+        </div>
+      </article>
+      <article class="mini">
+        <button class="mthumb" type="button" aria-label="Open PM2.5 Emerging Hot Spots, Ethiopia gallery"><img src="pm-1.jpg" alt=""><span>View maps</span></button><template><div class="media gallery" tabindex="0" aria-label="PM2.5 Emerging Hot Spots, Ethiopia gallery"><div class="stage"><img src="pm-1.jpg" alt="PM2.5 space-time cube in 3D"><button class="nav prev" type="button" aria-label="Previous slide">‹</button><button class="nav next" type="button" aria-label="Next slide">›</button></div><div class="cap" aria-live="polite">1 / 2 · PM2.5 space-time cube in 3D</div><div class="thumbs"><button class="thumb" type="button" aria-pressed="true" data-img="pm-1.jpg" data-cap="PM2.5 space-time cube in 3D" aria-label="Slide 1 of 2: PM2.5 space-time cube in 3D"><img src="pm-1.jpg" alt="" loading="lazy"></button><button class="thumb" type="button" aria-pressed="false" data-img="pm-2.jpg" data-cap="Emerging hot spot patterns" aria-label="Slide 2 of 2: Emerging hot spot patterns"><img src="pm-2.jpg" alt="" loading="lazy"></button></div></div></template>
+        <div class="mbody">
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">3D web scene · Space-time analysis</span></div>
+          <h3>PM2.5 Emerging Hot Spots, Ethiopia</h3>
+          <p>Built a space-time cube of PM2.5 concentrations and ran Emerging Hot Spot Analysis to separate new, intensifying and persistent pollution hot spots from cold spots across several years, shown in 3D.</p>
+          <div class="chips"><span class="chip">Space-time cube</span><span class="chip">Emerging Hot Spot Analysis</span><span class="chip">Scene Viewer</span></div>
+          <p class="links"><a href="https://pomona.maps.arcgis.com/home/webscene/viewer.html?webscene=be271f5ffd6c46a09d41fffaad27af95" target="_blank" rel="noopener">Open the 3D scene →</a></p>
+        </div>
+      </article>
+      <article class="mini">
+        <div class="mthumb textonly" aria-hidden="true"><span>Essay</span></div>
+        <div class="mbody">
+          <div class="toprow"><span class="org org-cpp">Cal Poly Pomona</span><span class="meta">Writing · StoryMap</span></div>
+          <h3>How GIS Became Conservation&#x27;s Most Powerful Tool</h3>
+          <p>An industry review of conservation GIS, from Roger Tomlinson and the first Landsat images to the habitat, connectivity and prioritization work agencies do with it today.</p>
+          <div class="chips"><span class="chip">Conservation</span><span class="chip">Remote sensing history</span></div>
+          <p class="links"><a href="https://storymaps.arcgis.com/stories/b5f9cd07ed7943f7829a78fe46f26c00" target="_blank" rel="noopener">Read the StoryMap →</a></p>
         </div>
       </article>
     </div>
@@ -178,34 +291,61 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     <div class="record">
       <div>
         <h2>Experience</h2>
-        <div class="job"><b>Esri, Technical Support Intern</b><span class="when">2026</span><span class="what">Reproduced customer issues across ArcGIS and Enterprise to find root causes, and logged bugs and enhancement requests.</span></div>
+        <div class="job"><b>Esri, Technical Support Intern</b><span class="when">2026</span><span class="what">Reproduced customer issues across ArcGIS Pro, ArcGIS Online and ArcGIS Enterprise to find root causes, and logged bugs and enhancement requests.</span></div>
         <div class="job"><b>Draw Tap GIS, GIS Intern</b><span class="when">2025–26</span><span class="what">Georeferenced 1981 and 1991 aerial imagery of Pomona for Public Works.</span></div>
-        <div class="job"><b>Alta California Geotechnical, Soil Technician</b><span class="when">2024–25</span><span class="what">Nuclear gauge density testing, sulfate and chloride lab work, and sieve analysis.</span></div>
+        <div class="job"><b>Alta California Geotechnical, Soil Technician</b><span class="when">2024–25</span><span class="what">Field sampling, nuclear gauge density testing, sulfate and chloride lab work, and sieve analysis.</span></div>
         <div class="job"><b>KT Corp, Quality Inspector Supervisor</b><span class="when">2022–24</span><span class="what">Led quality inspections and audits in manufacturing.</span></div>
         <div class="job"><b>The Home Depot, Garden Associate</b><span class="when">2019</span><span class="what">Helped customers choose and care for plants in a busy garden center.</span></div>
       </div>
       <div>
         <h2>Toolkit</h2>
         <dl class="skills">
-          <dt>GIS &amp; web</dt><dd>ArcGIS Pro, ArcGIS Online, ArcGIS Enterprise, Experience Builder, StoryMaps, Dashboards, QGIS</dd>
-          <dt>Analysis</dt><dd>Hydrologic modeling, hot spot analysis, suitability and equity analysis, georeferencing</dd>
-          <dt>Remote sensing</dt><dd>NDVI, LiDAR, raster analysis, drone photogrammetry in Pix4D</dd>
-          <dt>Code</dt><dd>Python and the ArcGIS API for Python</dd>
-          <dt>Credentials</dt><dd>FAA Part 107 Remote Pilot · Pi Gamma Mu International Honor Society in Social Sciences</dd>
+          <dt>GIS &amp; web</dt><dd>ArcGIS Pro, ArcGIS Online, ArcGIS Enterprise, Experience Builder, StoryMaps, Dashboards, Scene Viewer, Field Maps, QGIS</dd>
+          <dt>Analysis</dt><dd>Hot spot and emerging hot spot analysis, space-time cubes, hydrologic modeling, interpolation, enrichment, suitability and equity analysis, georeferencing</dd>
+          <dt>Remote sensing</dt><dd>NDVI, LiDAR canopy height, Landsat, NLCD impervious surface, drone photogrammetry in Pix4D</dd>
+          <dt>Code &amp; automation</dt><dd>Python, ArcPy and the ArcGIS API for Python, including custom geoprocessing tools; AI tools for scripting and data cleanup</dd>
+          <dt>Languages</dt><dd>English and Spanish</dd>
         </dl>
       </div>
     </div>
   </section>
+
+  <section id="education" style="border-top:1px solid var(--line)">
+    <h2>Education &amp; credentials</h2>
+    <p class="sub">Two schools, one track: geography and GIS from community college through a bachelor's degree.</p>
+    <div class="edu">
+      <div class="school">
+        <span class="org org-cpp">Cal Poly Pomona</span>
+        <h3>California State Polytechnic University, Pomona</h3>
+        <ul>
+          <li>B.S. Geography, Geospatial Analysis <span>· Dec 2026</span></li>
+          <li>Geography Association, Vice President and Treasurer</li>
+          <li>Pi Gamma Mu International Honor Society in Social Sciences</li>
+        </ul>
+      </div>
+      <div class="school">
+        <span class="org org-mtsac">Mt. San Antonio College</span>
+        <h3>Mt. San Antonio College</h3>
+        <ul>
+          <li>A.S. Geographic Information Systems <span>· 2026</span></li>
+          <li>A.A.-T Geography <span>· 2025</span></li>
+          <li>GIS Certificate <span>· 2025</span></li>
+          <li>Geotechnician Certificate <span>· 2025</span></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:18px"><span class="chip">FAA Part 107 Remote Pilot</span></p>
+  </section>
 </main>
 
-<footer><div class="wrap">Alexis Lepe · GIS portfolio · Updated November 2026</div></footer>
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg-head"><b id="dlgTitle"></b><button class="btn" type="button" id="dlgClose">Close</button></div><div id="dlgBody"></div></dialog>
+
+<footer><div class="wrap"><span>Alexis Lepe · GIS portfolio · Updated November 2026</span><a href="https://www.linkedin.com/in/alexis-lepe-332b83250/" target="_blank" rel="noopener">LinkedIn</a></div></footer>
 
 <script>
 (function(){
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   function rng(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
-  // simple value-noise field from summed gaussians
   function field(seed,n){const r=rng(seed);const c=[];for(let i=0;i<n;i++)c.push([r(),r(),0.08+r()*0.22,(r()<.25?-1:1)*(0.5+r())]);
     return (x,y)=>{let v=0;for(const [cx,cy,s,a] of c){const dx=x-cx,dy=y-cy;v+=a*Math.exp(-(dx*dx+dy*dy)/(2*s*s))}return v}}
   function contours(ctx,w,h,f,levels,color,alpha,step){
@@ -223,40 +363,45 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     ctx.globalAlpha=1}
   function size(cv){const r=cv.getBoundingClientRect();const d=devicePixelRatio||1;cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);const ctx=cv.getContext('2d');ctx.setTransform(d,0,0,d,0,0);return [ctx,r.width,r.height]}
   function lv(n,a,b){const o=[];for(let i=1;i<n;i++)o.push(a+(b-a)*i/n);return o}
-
   function drawHero(){const cv=document.getElementById('topo');const [ctx,w,h]=size(cv);ctx.clearRect(0,0,w,h);
-    const f=field(13,9);const fx=(x,y)=>f(x*0.9+0.3,y*0.7);contours(ctx,w,h,fx,lv(18,-0.8,1.6),css('--contour'),0.28,8)}
+    const f=field(13,9);contours(ctx,w,h,(x,y)=>f(x*0.9+0.3,y*0.7),lv(18,-0.8,1.6),css('--contour'),0.28,8)}
+  drawHero();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(drawHero,150)});
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawHero);
+  document.fonts&&document.fonts.ready.then(drawHero);
 
-  function drawSheet(cv){const [ctx,w,h]=size(cv);ctx.clearRect(0,0,w,h);const seed=+cv.dataset.seed;const f=field(seed,6);
-    contours(ctx,w,h,f,lv(12,-0.6,1.4),css('--contour'),0.35,5);
-    const r=rng(seed+3);const kind=cv.dataset.kind;
-    if(kind==='points'){ctx.fillStyle=css('--water');for(let i=0;i<16;i++){ctx.beginPath();ctx.arc(12+r()*(w-24),12+r()*(h-24),2.5+r()*3,0,7);ctx.fill()}}
-    if(kind==='streams'){ctx.strokeStyle=css('--water');ctx.lineWidth=1.6;for(let k=0;k<5;k++){let x=r()*w,y=0;ctx.beginPath();ctx.moveTo(x,y);while(y<h){y+=6;x+=(r()-.5)*8+(w*.5-x)*.03;ctx.lineTo(x,y)}ctx.stroke()}}
-    if(kind==='hotspots'){for(let i=0;i<6;i++){const x=r()*w,y=r()*h,s=14+r()*26;const g=ctx.createRadialGradient(x,y,0,x,y,s);g.addColorStop(0,css('--contour'));g.addColorStop(1,'transparent');ctx.globalAlpha=.55;ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,s,0,7);ctx.fill();ctx.globalAlpha=1}}
-  }
-  function all(){drawHero()}
-  all();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,150)});
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);
-  new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-  document.fonts&&document.fonts.ready.then(all);
-
-  document.querySelectorAll('.media').forEach(m=>{const stage=m.querySelector('.stage');const btns=[...m.querySelectorAll('.thumb')];
-    const vid=stage.querySelector('video');const base=stage.querySelector(':scope > img');const cap=m.querySelector('.cap');const capDefault=cap?cap.textContent:'';
-    let cur=0;
-    const show=i=>{cur=i;const b=btns[i];btns.forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
-      if(cap)cap.textContent=b.dataset.cap?`${i} / ${btns.length-1} · ${b.dataset.cap}`:capDefault;
-      m.classList.toggle('on-slide',!!b.dataset.img);
-      if(!vid){base.src=b.dataset.img;return}
-      vid.pause();
-      const old=stage.querySelector(':scope > img');if(old)old.remove();
-      if(b.dataset.img){vid.hidden=true;const im=document.createElement('img');im.src=b.dataset.img;im.alt=b.dataset.cap||'Project screenshot';stage.appendChild(im)}
-      else{vid.hidden=false}};
+  // Galleries: optional video first, then image slides with captions and arrows.
+  function initGallery(m){
+    const stage=m.querySelector('.stage');const vid=stage.querySelector('video');
+    let img=stage.querySelector(':scope > img');
+    if(!img){img=document.createElement('img');img.hidden=true;stage.prepend(img)}
+    const btns=[...m.querySelectorAll('.thumb')];const cap=m.querySelector('.cap');const defCap=cap.textContent;
+    const slides=btns.map((b,i)=>b.dataset.img?i:-1).filter(i=>i>=0);
+    let cur=btns.findIndex(b=>b.getAttribute('aria-pressed')==='true');if(cur<0)cur=0;
+    const show=i=>{cur=i;const b=btns[i];btns.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+      if(b.dataset.img){if(vid){vid.pause();vid.hidden=true}img.src=b.dataset.img;img.alt=b.dataset.cap||'';img.hidden=false;
+        m.classList.remove('on-video');cap.textContent=`${slides.indexOf(i)+1} / ${slides.length} · ${b.dataset.cap||''}`}
+      else{img.hidden=true;if(vid)vid.hidden=false;m.classList.add('on-video');cap.textContent=defCap}};
+    const step=d=>{let k=slides.indexOf(cur);k=k<0?(d>0?0:slides.length-1):(k+d+slides.length)%slides.length;show(slides[k])};
     btns.forEach((b,i)=>b.addEventListener('click',()=>show(i)));
-    const step=d=>{const imgs=btns.map((b,i)=>b.dataset.img?i:-1).filter(i=>i>=0);let k=imgs.indexOf(cur);k=k<0?0:(k+d+imgs.length)%imgs.length;show(imgs[k])};
-    m.querySelector('.prev')?.addEventListener('click',()=>step(-1));
-    m.querySelector('.next')?.addEventListener('click',()=>step(1));
-    m.addEventListener('keydown',e=>{if(!m.classList.contains('slides'))return;if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
-  });
+    m.querySelector('.prev').addEventListener('click',()=>step(-1));
+    m.querySelector('.next').addEventListener('click',()=>step(1));
+    m.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){step(1);e.preventDefault()}if(e.key==='ArrowLeft'){step(-1);e.preventDefault()}});
+    if(slides.length<2&&!vid){m.querySelectorAll('.nav').forEach(n=>n.hidden=true)}
+    show(cur);
+  }
+  document.querySelectorAll('#work .gallery').forEach(initGallery);
+
+  const dlg=document.getElementById('dlg'),body=document.getElementById('dlgBody');
+  document.querySelectorAll('.mini .mthumb[type="button"]').forEach(btn=>btn.addEventListener('click',()=>{
+    body.replaceChildren(btn.nextElementSibling.content.cloneNode(true));
+    document.getElementById('dlgTitle').textContent=btn.closest('.mini').querySelector('h3').textContent;
+    initGallery(body.querySelector('.gallery'));dlg.showModal();body.querySelector('.gallery').focus();
+  }));
+  const close=()=>{body.querySelectorAll('video').forEach(v=>v.pause());dlg.close()};
+  document.getElementById('dlgClose').addEventListener('click',close);
+  dlg.addEventListener('click',e=>{if(e.target===dlg)close()});
+  dlg.addEventListener('close',()=>body.querySelectorAll('video').forEach(v=>v.pause()));
+
   const btn=document.getElementById('copyEmail');
   btn.addEventListener('click',()=>{const t=document.getElementById('email').textContent;
     const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy',1500)};
@@ -264,6 +409,5 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}});
 })();
 </script>
-
 </body>
 </html>
